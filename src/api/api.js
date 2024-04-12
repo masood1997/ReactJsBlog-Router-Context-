@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL:"http://localhost:2000/api/v1",
+    baseURL:"https://todo-app-0kps.onrender.com/api/v1",
     headers:{
         'Content-type' : "application/json"
     },
@@ -9,7 +9,7 @@ const api = axios.create({
 });
 
 export const apiPrivate = axios.create({
-    baseURL:"http://localhost:2000/api/v1",
+    baseURL:"https://todo-app-0kps.onrender.com/api/v1",
     headers:{
         'Content-type' : "application/json"
     },
