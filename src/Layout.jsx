@@ -11,7 +11,7 @@ function Layout() {
         <Header title="ReactJs Blog" />
         <Navbar/>
         <Outlet />
-        <Footer />
+        {/* <Footer /> */}
       </BlogContextProvider>
     </main>
   );

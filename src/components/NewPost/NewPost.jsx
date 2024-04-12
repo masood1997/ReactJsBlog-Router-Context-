@@ -1,7 +1,32 @@
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useBlog } from '../../context/BlogContext';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+const NEW_TASK = '/task/new';
 
 const NewPost = () => {
-  const { title, description, author, setAuthor, setTitle, setDescription, handleAddNewPost } = useBlog();
+  const { title, description, author, setAuthor, setTitle, setPosts, setDescription, setIsAuthenticated } = useBlog();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const apiPrivate = useAxiosPrivate();
+
+  const handleAddNewPost = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await apiPrivate.post(NEW_TASK, { title, description, author });
+      setPosts((prevPosts) => [...prevPosts, response.data?.task]);
+      setTitle('');
+      setAuthor('');
+      setDescription('');
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+      console.log(`Error occured while creating post: ${error?.response?.data?.message}`);
+      if (error?.response?.status === 401) {
+        setIsAuthenticated({});
+        navigate('/login', { state: { from: location }, replace: true });
+      }
+    }
+  };
 
   return (
     <form onSubmit={handleAddNewPost} className="w-full flex-grow p-4 bg-white flex flex-col">
