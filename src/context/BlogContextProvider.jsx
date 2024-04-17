@@ -35,6 +35,7 @@ const BlogContextProvider = ({ children }) => {
 
   const [submitErrorMsg, setSubmitErrorMsg] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState({});
+  const [ persistent, setPersistent] = useState(JSON.parse(localStorage.getItem("persist")) || false);
   //const { data, fetchError } = useAxiosFetch('http://localhost:4000/posts');
 
   const navigate = useNavigate();
@@ -56,6 +57,10 @@ const BlogContextProvider = ({ children }) => {
     const match = password === confirmPassword;
     setIsMatch(match);
   }, [password, confirmPassword]);
+
+  useEffect(() => {
+    localStorage.setItem('persist', persistent);
+  }, [persistent]);
 
   const handleRegisterForm = async (e) => {
     e.preventDefault();
@@ -134,7 +139,9 @@ const BlogContextProvider = ({ children }) => {
         handleRegisterForm,
         handleLoginForm,
         isAuthenticated,
-        setIsAuthenticated
+        setIsAuthenticated,
+        persistent,
+        setPersistent
       }}
     >
       {children}

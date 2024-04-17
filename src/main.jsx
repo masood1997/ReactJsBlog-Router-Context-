@@ -15,6 +15,7 @@ import Register from './components/Register/Register.jsx';
 import Login from './components/Login/Login.jsx';
 import Logout from './components/Logout/Logout.jsx';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
+import PersistentLogin from './components/PersistentLogin/PersistentLogin.jsx';
 
 // import { useBlog } from './context/BlogContext.js';
 // const {isLoggedIn} = useBlog()
@@ -28,13 +29,15 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       {/* <Route path="post/:id" element={isLoggedIn ? <PostPage /> : <Login />} /> */}
       //Protected Routes
-      <Route element={<ProtectedRoute />}>
-        <Route path="" element={<Home />} />
-        <Route path="github" loader={gitHubLoader} element={<Github />} />
-        <Route path="new" element={<NewPost />} />
-        <Route path="post/:_id" element={<PostPage />} />
-        <Route path="edit/:_id" element={<EditPost />} />
-        <Route path="logout" element={<Logout />} />
+      <Route element={<PersistentLogin />}>
+        <Route element={<ProtectedRoute />}>
+          <Route path="" element={<Home />} />
+          <Route path="github" loader={gitHubLoader} element={<Github />} />
+          <Route path="new" element={<NewPost />} />
+          <Route path="post/:_id" element={<PostPage />} />
+          <Route path="edit/:_id" element={<EditPost />} />
+          <Route path="logout" element={<Logout />} />
+        </Route>
       </Route>
     </Route>
   )

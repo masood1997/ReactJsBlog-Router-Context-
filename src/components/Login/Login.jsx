@@ -9,10 +9,23 @@ const Login = () => {
   const location = useLocation();
   const fromPath = location.state?.from?.pathname || '/';
 
-  const { email, setEmail, password, setPassword, submitErrorMsg, setSubmitErrorMsg, isAuthenticated, handleLoginForm } =
-    useBlog();
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    submitErrorMsg,
+    setSubmitErrorMsg,
+    isAuthenticated,
+    handleLoginForm,
+    persistent,
+    setPersistent
+  } = useBlog();
 
-    // console.log("Displaying is authenticated in Login", isAuthenticated?.accessToken)
+  const togglePersistent = () => {
+    setPersistent((prev) => !prev);
+  };
+
   useEffect(() => {
     if (isAuthenticated.accessToken) {
       navigate(fromPath);
@@ -28,14 +41,15 @@ const Login = () => {
   }, [email, password]);
 
   return (
-    <section className="w-full max-w-420 min-h-400 flex flex-col justify-start p-4 bg-opacity-40 bg-gray-400">
+    <section className="flex flex-col items-center justify-center">
+    <div className="w-full max-w-md p-4 bg-opacity-40 bg-gray-400 rounded-lg shadow-lg">
       {submitErrorMsg && (
         <p ref={errorRef} className="submitError">
           {submitErrorMsg}
         </p>
       )}
-
-      <form className="flex flex-col space-y-4 flex-grow pb-4" onSubmit={handleLoginForm}>
+  
+      <form className="flex flex-col space-y-4" onSubmit={handleLoginForm}>
         <div className="flex flex-col">
           <label htmlFor="email" className="font-bold">
             Email:
@@ -51,7 +65,7 @@ const Login = () => {
             required
           />
         </div>
-
+  
         <div className="flex flex-col">
           <label htmlFor="password" className="font-bold">
             Password:
@@ -65,16 +79,26 @@ const Login = () => {
             required
           />
         </div>
+  
+        <div className="flex items-center">
+          <input
+            className="text-xs mt-1 mr-1"
+            type="checkbox"
+            id="persist"
+            onChange={togglePersistent}
+            checked={persistent}
+          />
+          <label htmlFor="persist">Trust this device</label>
+        </div>
+  
         <button className="font-nunito text-xl mt-4 px-4 py-2 rounded-lg bg-lime-500">Sign In</button>
       </form>
-      <p>
-        Need an Account?
-        <br />
-        <span className="line">
-          <Link to="/register">Register Now</Link>
-        </span>
+      <p className="mt-4">
+        Need an Account? <Link to="/register" className="text-blue-500 hover:underline">Register Now</Link>
       </p>
-    </section>
+    </div>
+  </section>
+  
   );
 };
 

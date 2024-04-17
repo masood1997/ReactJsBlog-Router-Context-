@@ -6,8 +6,6 @@ const useRefreshToken = () => {
   const refresh = async () => {
     const response = await api.get('/user/refresh');
     setIsAuthenticated((prev) => {
-    //   console.log('Previous accessToken :', JSON.stringify(prev));
-    //   console.log('Refreshed accessToken', response.data.accessToken);
       return { ...prev, accessToken: response?.data?.accessToken };
     });
     return response.data.accessToken;
