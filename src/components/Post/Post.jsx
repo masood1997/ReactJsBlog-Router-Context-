@@ -7,7 +7,6 @@ const ALL_TASK = '/task/myTasks';
 
 const Post = () => {
   const { search, posts, setPosts, searchResults, setSearchResults, setIsAuthenticated } = useBlog();
-  // console.log(isAuthenticated.accessToken)
   const location = useLocation();
   const navigate = useNavigate();
   const apiPrivate = useAxiosPrivate();
