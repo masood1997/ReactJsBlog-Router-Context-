@@ -8,7 +8,7 @@ const About = () => {
               <div className="space-y-6 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
                   <div className="md:5/12 lg:w-5/12 overflow-y-auto">
                       <img
-                          src="../../../public/pexels-ian-beckley-2440024.jpg"
+                          src="/public/pexels-ian-beckley-2440024.jpg"
                           alt="image"
                       />
                   </div>
