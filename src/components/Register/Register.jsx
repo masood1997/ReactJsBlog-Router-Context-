@@ -161,7 +161,7 @@ const Register = () => {
         <p>
           Already registered?
           <br />
-          <span className="line">
+          <span className="text-blue-500 hover:underline">
             <Link to="/login">Log In</Link>
           </span>
         </p>

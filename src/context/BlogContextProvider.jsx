@@ -21,6 +21,7 @@ const BlogContextProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [editTitle, setEditTitle] = useState('');
   const [editDescription, setEditDescription] = useState('');
+  
   const [user, setUser] = useState('');
   const [validUser, setValidUser] = useState(false);
 
